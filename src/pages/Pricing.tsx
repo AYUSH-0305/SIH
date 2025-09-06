@@ -17,51 +17,57 @@ import {
 export default function Pricing() {
   const plans = [
     {
-      name: "Starter",
-      price: "₹25,000",
+      name: "Department Level",
+      price: "₹1,50,000",
       period: "per year",
-      description: "Perfect for small colleges and institutes",
+      description: "For individual government departments and agencies",
       features: [
-        "Up to 1,000 certificates/year",
-        "Basic verification API",
-        "Email support",
-        "Standard security",
-        "Basic analytics dashboard"
+        "Up to 25,000 certificates/year",
+        "Government-grade security compliance",
+        "Dedicated government support",
+        "Basic fraud detection",
+        "Standard reporting dashboard",
+        "API access with rate limiting",
+        "Email & phone support"
       ],
       icon: <Building2 className="h-6 w-6" />,
       popular: false
     },
     {
-      name: "Professional",
-      price: "₹75,000", 
+      name: "State Level",
+      price: "₹5,00,000", 
       period: "per year",
-      description: "Ideal for universities and large institutions",
+      description: "For state government agencies and multi-department use",
       features: [
-        "Up to 10,000 certificates/year",
-        "Advanced verification API",
-        "Priority phone & email support",
-        "Enhanced security features",
+        "Up to 100,000 certificates/year",
+        "Advanced fraud prevention suite",
+        "Priority government support",
+        "Multi-department management",
         "Advanced analytics & reporting",
-        "Custom branding",
-        "Blockchain integration"
+        "Custom government branding",
+        "Blockchain verification",
+        "On-premise deployment option",
+        "Dedicated account manager"
       ],
       icon: <Crown className="h-6 w-6" />,
       popular: true
     },
     {
-      name: "Enterprise",
+      name: "Central Level",
       price: "Custom",
       period: "contact us",
-      description: "For government departments and large networks",
+      description: "For central government bodies and national implementation",
       features: [
-        "Unlimited certificates",
-        "Full API suite",
-        "Dedicated account manager",
-        "Maximum security compliance",
-        "Custom integrations",
-        "Multi-institution management",
-        "Fraud prevention tools",
-        "On-premise deployment option"
+        "Unlimited certificate verification",
+        "National-scale infrastructure",
+        "24/7 dedicated government support",
+        "Maximum security & compliance",
+        "Multi-state integration",
+        "Custom government integrations",
+        "Advanced fraud analytics",
+        "Disaster recovery & backup",
+        "Full API suite with no limits",
+        "White-label deployment"
       ],
       icon: <Globe className="h-6 w-6" />,
       popular: false
@@ -85,11 +91,11 @@ export default function Pricing() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Choose Your Plan
+            Government Verification Plans
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Join 150+ institutions already using DigiVerify to secure their credentials. 
-            Start protecting your certificates today.
+            Secure digital certificate verification for government departments and agencies. 
+            Trusted by the Government of Jharkhand for official credential verification.
           </p>
         </div>
 
@@ -148,33 +154,33 @@ export default function Pricing() {
 
         {/* Benefits Section */}
         <Card className="p-8 bg-muted/30">
-          <h2 className="text-2xl font-bold text-center mb-8">Why Institutions Choose DigiVerify</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Why Government Departments Choose DigiVerify</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="hero-gradient w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Shield className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold mb-2">Enhanced Security</h3>
+              <h3 className="font-semibold mb-2">Government-Grade Security</h3>
               <p className="text-sm text-muted-foreground">
-                Prevent fraud with our advanced verification technology
+                Meets all government security standards and compliance requirements
               </p>
             </div>
             <div className="text-center">
               <div className="hero-gradient w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Zap className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold mb-2">Easy Integration</h3>
+              <h3 className="font-semibold mb-2">Seamless Integration</h3>
               <p className="text-sm text-muted-foreground">
-                Get up and running in minutes with our simple APIs
+                Integrates with existing government systems and workflows
               </p>
             </div>
             <div className="text-center">
               <div className="hero-gradient w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Users className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold mb-2">Trusted Network</h3>
+              <h3 className="font-semibold mb-2">Official Government Network</h3>
               <p className="text-sm text-muted-foreground">
-                Part of the official Jharkhand education verification system
+                Part of the official Jharkhand government verification infrastructure
               </p>
             </div>
           </div>
@@ -185,31 +191,31 @@ export default function Pricing() {
           <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div>
-              <h3 className="font-semibold mb-2">How quickly can we get started?</h3>
+              <h3 className="font-semibold mb-2">How quickly can our department get started?</h3>
               <p className="text-sm text-muted-foreground">
-                Most institutions are up and running within 24 hours of signing up. 
-                Our technical team provides full onboarding support.
+                Most government departments are operational within 48 hours of signing up. 
+                Our dedicated government support team handles all technical setup.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Is our data secure?</h3>
+              <h3 className="font-semibold mb-2">Does it comply with government data policies?</h3>
               <p className="text-sm text-muted-foreground">
-                Yes, we use bank-grade encryption and follow all Indian data protection 
-                regulations. Your institution data never leaves our secure servers.
+                Yes, DigiVerify meets all Indian government data protection standards 
+                and can be deployed on-premise if required for sensitive data.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Can we customize the verification portal?</h3>
+              <h3 className="font-semibold mb-2">Can we customize it for our department?</h3>
               <p className="text-sm text-muted-foreground">
-                Professional and Enterprise plans include custom branding options 
-                to match your institution's identity.
+                All plans include government branding customization and can integrate 
+                with your existing departmental systems and workflows.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2">What about existing certificates?</h3>
+              <h3 className="font-semibold mb-2">What about legacy government records?</h3>
               <p className="text-sm text-muted-foreground">
-                We can help migrate and verify your historical certificate database 
-                during the onboarding process at no extra cost.
+                We provide full migration services for historical records and legacy 
+                certificate databases at no additional cost during onboarding.
               </p>
             </div>
           </div>
@@ -217,12 +223,12 @@ export default function Pricing() {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <h2 className="text-2xl font-bold mb-4">Ready to Secure Your Certificates?</h2>
+          <h2 className="text-2xl font-bold mb-4">Ready to Deploy Government-Grade Verification?</h2>
           <p className="text-muted-foreground mb-8">
-            Join the network of trusted institutions in Jharkhand
+            Join the Government of Jharkhand's trusted verification network
           </p>
           <Button asChild variant="hero" size="lg">
-            <Link to="/contact">Contact Our Team</Link>
+            <Link to="/contact">Contact Government Sales Team</Link>
           </Button>
         </div>
       </div>
