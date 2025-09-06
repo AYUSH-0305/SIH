@@ -35,6 +35,7 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeView, setActiveView] = useState("overview");
 
   useEffect(() => {
     if (!auth.isAuthenticated || auth.user?.role !== 'admin') {
@@ -103,6 +104,33 @@ export default function AdminDashboard() {
     { id: 3, certificateId: "JTU-2023-MECH-9012", reason: "Visual tampering", institution: "JTU", dateAdded: "2024-03-05" },
   ];
 
+  const manualReviewQueue = [
+    { 
+      caseId: "MR-20250906-8A3B", 
+      certificateId: "JH-UNIV-RNC-98765", 
+      submittedOn: "Sept 6, 2025, 1:37 PM", 
+      reasonFlagged: "Content Mismatch", 
+      status: "New", 
+      assignedTo: "Unassigned" 
+    },
+    { 
+      caseId: "MR-20250905-7C2D", 
+      certificateId: "RU-2024-ENG-45123", 
+      submittedOn: "Sept 5, 2025, 3:22 PM", 
+      reasonFlagged: "Visual Anomaly", 
+      status: "In Review", 
+      assignedTo: "Dr. Amit Kumar" 
+    },
+    { 
+      caseId: "MR-20250905-9F1E", 
+      certificateId: "SKMU-2023-ARTS-78901", 
+      submittedOn: "Sept 5, 2025, 11:45 AM", 
+      reasonFlagged: "Content Mismatch", 
+      status: "Pending", 
+      assignedTo: "Ms. Priya Singh" 
+    }
+  ];
+
   const verificationTrend = [
     { date: "Mar 1", verified: 245, fake: 8 },
     { date: "Mar 2", verified: 312, fake: 12 },
@@ -141,7 +169,24 @@ export default function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+          {/* Manual Review Queue - Priority Card */}
+          <Card className="p-6 bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200 cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setActiveView('manual-review')}>
+            <div className="flex items-center justify-between mb-2">
+              <div className="p-2 bg-amber-100 rounded-lg">
+                <AlertTriangle className="h-5 w-5 text-amber-600" />
+              </div>
+              <Badge variant="secondary" className="bg-amber-100 text-amber-700 text-xs">
+                Urgent
+              </Badge>
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-amber-900">14</p>
+              <p className="text-sm font-medium text-amber-700">Manual Review Queue</p>
+              <p className="text-xs text-amber-600 mt-1">New requests requiring attention</p>
+            </div>
+          </Card>
+
           {stats.map((stat, index) => (
             <Card key={index} className="p-6">
               <div className="flex items-center justify-between">
@@ -164,9 +209,10 @@ export default function AdminDashboard() {
         </div>
 
         {/* Main Content Tabs */}
-        <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+        <Tabs value={activeView} onValueChange={setActiveView} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="manual-review">Manual Review</TabsTrigger>
             <TabsTrigger value="institutions">Institutions</TabsTrigger>
             <TabsTrigger value="analytics">Fraud Analytics</TabsTrigger>
             <TabsTrigger value="blacklist">Blacklist Management</TabsTrigger>
@@ -220,6 +266,71 @@ export default function AdminDashboard() {
                 </div>
               </Card>
             </div>
+          </TabsContent>
+
+          {/* Manual Review Queue Tab */}
+          <TabsContent value="manual-review" className="space-y-6">
+            <Card className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h3 className="text-lg font-semibold">Manual Review Requests</h3>
+                  <p className="text-sm text-muted-foreground">Cases requiring human review and verification</p>
+                </div>
+                <Badge variant="secondary" className="bg-amber-100 text-amber-700">
+                  {manualReviewQueue.length} Pending
+                </Badge>
+              </div>
+
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Case ID</TableHead>
+                    <TableHead>Certificate ID</TableHead>
+                    <TableHead>Submitted On</TableHead>
+                    <TableHead>Reason Flagged</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Assigned To</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {manualReviewQueue.map((item, index) => (
+                    <TableRow key={index} className={index === 0 ? 'bg-amber-50 border-amber-200' : ''}>
+                      <TableCell className="font-mono text-sm font-medium">{item.caseId}</TableCell>
+                      <TableCell className="font-mono text-sm">{item.certificateId}</TableCell>
+                      <TableCell className="text-sm">{item.submittedOn}</TableCell>
+                      <TableCell>
+                        <Badge variant={item.reasonFlagged === 'Content Mismatch' ? 'destructive' : 'secondary'}>
+                          {item.reasonFlagged}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={
+                          item.status === 'New' ? 'secondary' : 
+                          item.status === 'In Review' ? 'default' : 'outline'
+                        }>
+                          {item.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-sm">{item.assignedTo}</TableCell>
+                      <TableCell>
+                        <div className="flex space-x-2">
+                          <Button variant="outline" size="sm">
+                            <Eye className="mr-2 h-4 w-4" />
+                            Review
+                          </Button>
+                          {item.status === 'New' && (
+                            <Button variant="hero" size="sm">
+                              Assign
+                            </Button>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Card>
           </TabsContent>
 
           {/* Institutions Tab */}

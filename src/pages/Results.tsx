@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Navigation from "@/components/Navigation";
 import { 
   CheckCircle, 
@@ -24,6 +25,7 @@ type ResultType = 'verified' | 'content-mismatch' | 'visual-anomaly' | 'blockcha
 export default function Results() {
   const navigate = useNavigate();
   const [resultType, setResultType] = useState<ResultType>('verified');
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   useEffect(() => {
     const verificationType = sessionStorage.getItem('verificationType');
@@ -187,6 +189,22 @@ export default function Results() {
                 <p className="text-sm text-muted-foreground">
                   The name on the certificate does not match university enrollment records.
                 </p>
+                
+                {/* Manual Review Section */}
+                <div className="mt-6 p-4 bg-muted rounded-lg border">
+                  <h4 className="font-semibold text-foreground mb-2">Need a Second Opinion?</h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    If you believe this result is in error or require an official human review, 
+                    you can submit this case to the Higher Education Department.
+                  </p>
+                  <Button 
+                    variant="secondary" 
+                    onClick={() => setShowReviewModal(true)}
+                    className="w-full"
+                  >
+                    Request Manual Review
+                  </Button>
+                </div>
               </div>
             )}
 
@@ -203,6 +221,22 @@ export default function Results() {
                   <p>• Inconsistent font rendering</p>
                   <p>• Digital signature mismatch</p>
                   <p>• Unusual compression artifacts</p>
+                </div>
+                
+                {/* Manual Review Section */}
+                <div className="mt-6 p-4 bg-muted rounded-lg border">
+                  <h4 className="font-semibold text-foreground mb-2">Need a Second Opinion?</h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    If you believe this result is in error or require an official human review, 
+                    you can submit this case to the Higher Education Department.
+                  </p>
+                  <Button 
+                    variant="secondary" 
+                    onClick={() => setShowReviewModal(true)}
+                    className="w-full"
+                  >
+                    Request Manual Review
+                  </Button>
                 </div>
               </div>
             )}
@@ -281,6 +315,50 @@ export default function Results() {
             <Link to="/verify">Verify Another Certificate</Link>
           </Button>
         </div>
+        
+        {/* Manual Review Modal */}
+        <Dialog open={showReviewModal} onOpenChange={setShowReviewModal}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader className="text-center">
+              <div className="mx-auto mb-4 w-16 h-16 bg-success-light rounded-full flex items-center justify-center">
+                <CheckCircle className="h-8 w-8 text-success" />
+              </div>
+              <DialogTitle className="text-xl font-semibold">Review Request Submitted</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 text-center">
+              <p className="text-muted-foreground">
+                Your request for a manual review has been successfully submitted to the 
+                Department of Higher Education. You will be notified of the outcome via email.
+              </p>
+              
+              <div className="bg-muted p-4 rounded-lg space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Case ID:</span>
+                  <span className="font-mono font-medium">MR-20250906-8A3B</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Certificate ID:</span>
+                  <span className="font-mono font-medium">JH-UNIV-RNC-98765</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Submitted:</span>
+                  <span className="font-medium">September 6, 2025, 1:37 PM IST</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Estimated Response:</span>
+                  <span className="font-medium">3-5 Business Days</span>
+                </div>
+              </div>
+              
+              <Button 
+                onClick={() => setShowReviewModal(false)} 
+                className="w-full"
+              >
+                Close
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
