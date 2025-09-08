@@ -164,7 +164,7 @@ export default function Home() {
               Follow our 2-step interactive demo. First, you'll act as a university registrar to issue a tamper-proof digital certificate. Then, you'll act as an employer to verify it instantly.
             </p>
             <Button asChild variant="blockchain" size="xl" className="group">
-              <Link to="/demo-issuance">
+              <Link to="/demo-bulk-upload">
                 Start Interactive Demo
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>

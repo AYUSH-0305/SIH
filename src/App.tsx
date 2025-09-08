@@ -19,6 +19,11 @@ import InstitutionDashboard from "./pages/InstitutionDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import DemoIssuance from "./pages/DemoIssuance";
 import IssuanceConfirmation from "./pages/IssuanceConfirmation";
+import DemoBulkUpload from "./pages/DemoBulkUpload";
+import DemoMerkleGeneration from "./pages/DemoMerkleGeneration";
+import DemoBatchConfirmation from "./pages/DemoBatchConfirmation";
+import DemoMerkleVerification from "./pages/DemoMerkleVerification";
+import DemoResults from "./pages/DemoResults";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +65,11 @@ const App = () => {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/demo-issuance" element={<DemoIssuance />} />
               <Route path="/issuance-confirmation" element={<IssuanceConfirmation />} />
+              <Route path="/demo-bulk-upload" element={<DemoBulkUpload />} />
+              <Route path="/demo-merkle-generation" element={<DemoMerkleGeneration />} />
+              <Route path="/demo-batch-confirmation" element={<DemoBatchConfirmation />} />
+              <Route path="/demo-merkle-verification" element={<DemoMerkleVerification />} />
+              <Route path="/demo-results" element={<DemoResults />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
