@@ -1,21 +1,27 @@
-import { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import Navigation from "@/components/Navigation";
 import { 
   Upload, 
   FileText, 
   Scan,
   ArrowLeft,
-  X
+  X,
+  ArrowDown
 } from "lucide-react";
 
 export default function Verify() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [simulateTampering, setSimulateTampering] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isDemoMode = searchParams.get('demo') === 'true';
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -48,8 +54,18 @@ export default function Verify() {
     if (selectedFile) {
       // Store file data in session for the analysis page
       sessionStorage.setItem('verificationFile', selectedFile.name);
+      if (simulateTampering) {
+        sessionStorage.setItem('simulateTampering', 'true');
+      }
       navigate('/analysis');
     }
+  };
+
+  const handleQRScan = () => {
+    if (simulateTampering) {
+      sessionStorage.setItem('simulateTampering', 'true');
+    }
+    navigate('/qr-scan');
   };
 
   const clearFile = () => {
@@ -72,6 +88,23 @@ export default function Verify() {
             </Link>
           </Button>
         </div>
+
+        {/* Demo Mode Instructions */}
+        {isDemoMode && (
+          <Card className="p-6 bg-blockchain/10 border-blockchain/20 mb-8">
+            <div className="flex items-start space-x-3">
+              <ArrowDown className="h-5 w-5 text-blockchain mt-1 flex-shrink-0" />
+              <div>
+                <p className="text-foreground font-medium mb-2">
+                  You are now acting as an employer. The certificate you just issued is ready to be verified.
+                </p>
+                <p className="text-muted-foreground text-sm">
+                  Click the button below to simulate scanning its QR code and see instant blockchain verification in action.
+                </p>
+              </div>
+            </div>
+          </Card>
+        )}
 
         <div className="text-center mb-12">
           <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -149,7 +182,21 @@ export default function Verify() {
               )}
             </div>
             
-            <div className="mt-6 text-center">
+            <div className="mt-6 text-center space-y-4">
+              {/* Demo Mode Toggle for Upload */}
+              {isDemoMode && (
+                <div className="flex items-center justify-center space-x-2 p-4 bg-muted/30 rounded-lg">
+                  <Switch 
+                    id="simulate-tampering-upload" 
+                    checked={simulateTampering}
+                    onCheckedChange={setSimulateTampering}
+                  />
+                  <Label htmlFor="simulate-tampering-upload" className="text-sm">
+                    Simulate Tampering
+                  </Label>
+                </div>
+              )}
+              
               <Button
                 variant="verify"
                 size="lg"
@@ -185,15 +232,28 @@ export default function Verify() {
                   For certificates with embedded QR codes - instant blockchain verification
                 </p>
               </div>
+              
+              {/* Demo Mode Toggle */}
+              {isDemoMode && (
+                <div className="flex items-center justify-center space-x-2 mb-4 p-4 bg-muted/30 rounded-lg">
+                  <Switch 
+                    id="simulate-tampering" 
+                    checked={simulateTampering}
+                    onCheckedChange={setSimulateTampering}
+                  />
+                  <Label htmlFor="simulate-tampering" className="text-sm">
+                    Simulate Tampering
+                  </Label>
+                </div>
+              )}
+              
               <Button
-                asChild
                 variant="blockchain"
                 size="lg"
                 className="min-w-[200px]"
+                onClick={handleQRScan}
               >
-                <Link to="/qr-scan">
-                  Scan QR Code for Digital Certificate
-                </Link>
+                Scan QR Code {isDemoMode ? 'to Verify' : 'for Digital Certificate'}
               </Button>
             </div>
           </Card>

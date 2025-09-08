@@ -153,6 +153,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Live Demo Section */}
+      <section className="py-20 bg-gradient-to-r from-blockchain/10 to-primary/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
+              Live Demo: See the Blockchain in Action
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-4xl mx-auto mb-8">
+              Follow our 2-step interactive demo. First, you'll act as a university registrar to issue a tamper-proof digital certificate. Then, you'll act as an employer to verify it instantly.
+            </p>
+            <Button asChild variant="blockchain" size="xl" className="group">
+              <Link to="/demo-issuance">
+                Start Interactive Demo
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* How It Works Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
