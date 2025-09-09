@@ -14,3 +14,4 @@ const InstitutionSchema = new mongoose.Schema(
 export default mongoose.model('Institution', InstitutionSchema);
 
 
+

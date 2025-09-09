@@ -26,3 +26,7 @@ dist-ssr
 # custom ignores
 backend/uploads/
 testingcompo/.venv/
+
+# monorepo ignores
+backend/uploads/
+testingcompo/.venv/
