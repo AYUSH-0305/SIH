@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>Student Data Management</h1>
+                </div>
+                <div class="stats" id="stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span id="total-students">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-building"></i>
+                        <span id="total-branches">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <h2><i class="fas fa-search"></i> Search Students</h2>
+                    <div class="search-form">
+                        <div class="search-input-group">
+                            <input type="text" id="search-input" placeholder="Search by roll number, name, or application number...">
+                            <button id="search-btn" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="search-filters">
+                            <select id="search-type">
+                                <option value="all">Search All Fields</option>
+                                <option value="roll_no">Roll Number</option>
+                                <option value="name">Student Name</option>
+                                <option value="application_no">Application Number</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- File Upload Section -->
+            <section class="upload-section">
+                <div class="upload-container">
+                    <h2><i class="fas fa-upload"></i> Upload Data</h2>
+                    <div class="upload-options">
+                        <div class="upload-option">
+                            <label for="pdf-upload" class="upload-label">
+                                <i class="fas fa-file-pdf"></i>
+                                <span>Upload PDF</span>
+                                <input type="file" id="pdf-upload" accept=".pdf" hidden>
+                            </label>
+                        </div>
+                        <div class="upload-option">
+                            <label for="json-upload" class="upload-label">
+                                <i class="fas fa-file-code"></i>
+                                <span>Upload JSON</span>
+                                <input type="file" id="json-upload" accept=".json" hidden>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="upload-status" class="upload-status"></div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="results-container">
+                    <div class="results-header">
+                        <h2><i class="fas fa-list"></i> Search Results</h2>
+                        <div class="results-count" id="results-count">No search performed yet</div>
+                    </div>
+                    <div id="results-content" class="results-content">
+                        <div class="welcome-message">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Enter a search term above to find students, or upload a PDF/JSON file to add new data.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading...</p>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
